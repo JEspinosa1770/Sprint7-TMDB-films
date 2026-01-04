@@ -1,32 +1,41 @@
 import { Injectable } from '@angular/core';
-import type { Film } from '../models/film';
+import type { FilmsResponse } from '../models/film';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Api {
-  async getFilmsBlock(): Promise<Film | undefined> {
-    const API_TMDB: string = 'https://api.themoviedb.org/3/movie/popular?page=1';
-    const answer: Response = await fetch(API_TMDB);
-    if (!answer.ok) {
-        throw new Error(`Error HTTP: ${answer.status}`);
+  private readonly API_URL = 'https://api.themoviedb.org/3';
+  private readonly API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMWRjMWQ5ZjExYjg4Mjg5NTZiMjVkMzdjZmMxNTkzNiIsIm5iZiI6MTc2NjM0MTkzNy40NTQwMDAyLCJzdWIiOiI2OTQ4M2QzMWQzMDNhNmJjMjc4ZWI2NjkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Pjv-_hq-jmVRgSRR2aH_LsrPSKcAQzcMhNzBGGVtKb0';
+
+  async getFilmsBlock(page: number = 1): Promise<FilmsResponse> {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${this.API_TOKEN}`);
+
+    const requestOptions: RequestInit = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    const response = await fetch(`${this.API_URL}/movie/popular?page=${page}`, requestOptions);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const dataFilm = await answer.json();
-console.log(dataFilm)
-    return dataFilm;
-}
-}
+    return response.json();
+  }
 
-
-// export const getWeather = async (): Promise<DataWeather | undefined> => {
-//     const API_WEATHER: string = 'https://api.open-meteo.com/v1/forecast?latitude=41.3888&longitude=2.159&current_weather=true&language=es'
-//     const answer: Response = await fetch(API_WEATHER);
+//   async getFilmsBlock(): Promise<Film | undefined> {
+//     const API_TMDB: string = 'https://api.themoviedb.org/3/movie/popular?page=1';
+//     const answer: Response = await fetch(API_TMDB);
 //     if (!answer.ok) {
 //         throw new Error(`Error HTTP: ${answer.status}`);
 //     }
 
-//     const dataWeather = await answer.json();
-
-//     return dataWeather;
+//     const dataFilm = await answer.json();
+// console.log(dataFilm)
+//     return dataFilm;
 // }
+}
