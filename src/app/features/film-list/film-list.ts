@@ -63,24 +63,4 @@ console.error(err);
     await this.loadMovies(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  // async nextPage() {
-  //   if (this.currentPage() < this.totalPages()) {
-  //     await this.loadMovies(this.currentPage() + 1);
-  //     window.scrollTo({ top: 0, behavior: 'smooth' });
-  //   }
-  // }
-
-  // async previousPage() {
-  //   if (this.currentPage() > 1) {
-  //     await this.loadMovies(this.currentPage() - 1);
-  //     window.scrollTo({ top: 0, behavior: 'smooth' });
-  //   }
-  // }
-
-  // async goToPage(page: number) {
-  //   if (page >= 1 && page <= this.totalPages()) {
-  //     await this.loadMovies(page);
-  //     window.scrollTo({ top: 0, behavior: 'smooth' });
-  //   }
-  // }
 }

@@ -20,7 +20,7 @@
       <div class="bg-white rounded-lg shadow p-4">
         <h3 class="font-bold">{{ movie.title }}</h3>
         <img [src]="getImageUrl(movie.backdrop_path)" [alt]="movie.title"  class="w-full h-auto pt-2" />
-        <!-- <p class="text-sm text-gray-600"><span class="keyTitle">Descripción:</span> {{ translationService.getTranslation(movie.overview) }}</p> -->
+        <!-- <p class="text-sm text-gray-600"><span class="keyTitle">Descripción:</span> {{ translationService.getTranslation(movie.overview) }}</p> TODO -->
         <p class="text-sm text-gray-600 pt-2"><span class="keyTitle">Descripción:</span> {{ movie.overview }}</p>
         <p class="text-sm text-gray-600 pt-2"><span class="keyTitle">Estreno:</span> {{ movie.release_date }}</p>
       </div>
@@ -29,19 +29,5 @@
 
   <app-buttons-nav [currentPage]="currentPage()" [totalPages]="totalPages()" [isLoading]="isLoading()"
     (previousPageEvent)="onPreviousPage()" (nextPageEvent)="onNextPage()" (goToPageEvent)="onGoToPage($event)" />
-
-<!-- <app-buttons-nav></app-buttons-nav> -->
-<!-- PONER LOS BOTONES COMO COMPONENTE en la carpeta layout, y llamarlos desde este template ANTES y DESPUÉS del listado -->
-    <!-- <div class="flex justify-center items-center gap-4 py-8">
-      <button (click)="previousPage()" [disabled]="currentPage() === 1 || isLoading()" class="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors">← Anterior</button>
-
-      <div class="flex items-center gap-2">
-        <span class="text-gray-700">Página</span>
-        <input type="number" [value]="currentPage()" (keyup.enter)="goToPage(+$any($event.target).value)" (blur)="goToPage(+$any($event.target).value)" min="1" [max]="totalPages()" [disabled]="isLoading()" class="w-20 px-2 py-1 border border-gray-300 rounded text-center disabled:bg-gray-100 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <span class="text-gray-700">de {{ totalPages() }}</span>
-      </div>
-
-      <button (click)="nextPage()" [disabled]="currentPage() === totalPages() || isLoading()" class="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors">Siguiente →</button>
-    </div> -->
-  }
+}
 
