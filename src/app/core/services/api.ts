@@ -26,16 +26,4 @@ export class Api {
 
     return response.json();
   }
-
-//   async getFilmsBlock(): Promise<Film | undefined> {
-//     const API_TMDB: string = 'https://api.themoviedb.org/3/movie/popular?page=1';
-//     const answer: Response = await fetch(API_TMDB);
-//     if (!answer.ok) {
-//         throw new Error(`Error HTTP: ${answer.status}`);
-//     }
-
-//     const dataFilm = await answer.json();
-// console.log(dataFilm)
-//     return dataFilm;
-// }
 }
