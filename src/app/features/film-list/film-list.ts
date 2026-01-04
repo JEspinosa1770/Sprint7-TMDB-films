@@ -2,10 +2,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Api } from '../../core/services/api';
 // import { Translate } from '../../core/services/translate'
 import { Film, FilmsResponse } from '../../core/models/film';
+import { ButtonsNav } from "../../layout/buttons-nav/buttons-nav";
 
 @Component({
   selector: 'app-film-list',
-  imports: [],
+  imports: [ButtonsNav],
   templateUrl: './film-list.html',
   styleUrl: './film-list.css',
 })
@@ -47,4 +48,39 @@ console.error(err);
       this.isLoading.set(false);
     }
   }
+
+  async onPreviousPage() {
+    await this.loadMovies(this.currentPage() - 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  async onNextPage() {
+    await this.loadMovies(this.currentPage() + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  async onGoToPage(page: number) {
+    await this.loadMovies(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // async nextPage() {
+  //   if (this.currentPage() < this.totalPages()) {
+  //     await this.loadMovies(this.currentPage() + 1);
+  //     window.scrollTo({ top: 0, behavior: 'smooth' });
+  //   }
+  // }
+
+  // async previousPage() {
+  //   if (this.currentPage() > 1) {
+  //     await this.loadMovies(this.currentPage() - 1);
+  //     window.scrollTo({ top: 0, behavior: 'smooth' });
+  //   }
+  // }
+
+  // async goToPage(page: number) {
+  //   if (page >= 1 && page <= this.totalPages()) {
+  //     await this.loadMovies(page);
+  //     window.scrollTo({ top: 0, behavior: 'smooth' });
+  //   }
+  // }
 }
