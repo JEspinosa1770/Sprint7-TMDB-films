@@ -2,7 +2,7 @@ export interface Film {
   id: number,
   title: string,
   overview: string,
-  release_data: string,
+  release_date: string,
   original_language: string,
   backdrop_path: string,
   poster_path: string,
