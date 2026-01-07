@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 
 export const routes: Routes = [
   { path: '', component: FilmList },
-  { path: 'film', component: FilmDetail },
+  // { path: 'film', component: FilmDetail },
+  { path: 'movie/:id', component: FilmDetail },
   { path: 'login', component: Login },
   { path: 'register', component: Register},
   { path: "**", redirectTo: ''}

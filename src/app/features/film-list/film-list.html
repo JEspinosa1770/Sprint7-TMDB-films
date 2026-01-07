@@ -17,12 +17,12 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
     @for (movie of movies(); track movie.id) {
-      <div class="bg-white rounded-lg shadow p-4">
+      <div class="bg-white rounded-lg shadow p-4  cursor-pointer hover:shadow-xl transition-shadow duration-300" (click)="onMovieClick(movie)">
         <h3 class="font-bold">{{ movie.title }}</h3>
         <img [src]="getImageUrl(movie.backdrop_path)" [alt]="movie.title"  class="w-full h-auto pt-2" />
         <!-- <p class="text-sm text-gray-600"><span class="keyTitle">Descripción:</span> {{ translationService.getTranslation(movie.overview) }}</p> TODO -->
-        <p class="text-sm text-gray-600 pt-2"><span class="keyTitle">Descripción:</span> {{ movie.overview }}</p>
-        <p class="text-sm text-gray-600 pt-2"><span class="keyTitle">Estreno:</span> {{ movie.release_date }}</p>
+        <p class="text-sm text-gray-600 pt-2"><span class="strongKey">Descripción:</span> {{ movie.overview }}</p>
+        <p class="text-sm text-gray-600 pt-2"><span class="strongKey">Estreno:</span> {{ movie.release_date }}</p>
       </div>
     }
   </div>

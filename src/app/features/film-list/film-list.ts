@@ -3,6 +3,7 @@ import { Api } from '../../core/services/api';
 // import { Translate } from '../../core/services/translate'
 import { Film, FilmsResponse } from '../../core/models/film';
 import { ButtonsNav } from "../../layout/buttons-nav/buttons-nav";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-film-list',
@@ -12,6 +13,7 @@ import { ButtonsNav } from "../../layout/buttons-nav/buttons-nav";
 })
 export class FilmList implements OnInit {
   private apiService = inject(Api);
+  private router = inject(Router);
   // translationService = inject(Translate);
 
   movies = signal<Film[]>([]);
@@ -28,7 +30,11 @@ export class FilmList implements OnInit {
   }
 
   async ngOnInit() {
-    await this.loadMovies(1);
+    const state = history.state;
+    const returnToPage = state?.returnToPage || 1;
+
+    await this.loadMovies(returnToPage);
+    // await this.loadMovies(1);
   }
 
   async loadMovies(page: number) {
@@ -47,6 +53,15 @@ console.error(err);
       this.error.set('Error al cargar las películas');
       this.isLoading.set(false);
     }
+  }
+
+  onMovieClick(movie: Film): void {
+    this.router.navigate(['/movie', movie.id], {
+      state: {
+        movie: movie,
+        returnPage: this.currentPage()
+      }
+    });
   }
 
   async onPreviousPage() {

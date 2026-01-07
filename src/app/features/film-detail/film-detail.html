@@ -1,1 +1,78 @@
 <p>film-detail works!</p>
+
+@if (movie(); as film) {
+  <div class="min-h-screen bg-gray-100 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <button (click)="goBack()" class="mb-6 flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Volver al listado
+      </button>
+
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/3">
+            <img [src]="getPosterUrl(film.poster_path)" [alt]="film.title" class="w-full h-full object-contain">
+          </div>
+
+          <div class="md:w-2/3 p-8">
+            <h1 class="text-4xl font-bold mb-2">{{ film.title }}</h1>
+
+            @if (film.original_title !== film.title) {
+              <p class="text-xl text-gray-600 mb-4"><span class="strongKey">Título original:</span> {{ film.original_title }}</p>
+            }
+
+            <div class="flex flex-wrap gap-4 mb-6">
+              <div class="flex items-center">
+                <span class="strongKey">Votos: </span>
+                <span class="text-yellow-500 mr-1">⭐</span>
+                <span class="font-semibold">{{ film.vote_average.toFixed(1) }}</span>
+                <span class="text-gray-500 ml-1">({{ film.vote_count }} votos)</span>
+              </div>
+
+              <div class="text-gray-600"><span class="strongKey">Estreno: </span>
+                📅 {{ film.release_date }}
+              </div>
+
+              <div class="text-gray-600"><span class="strongKey">Idioma original: </span>
+                🌐 {{ film.original_language.toUpperCase() }}
+              </div>
+
+              <div class="text-gray-600"><span class="strongKey">Popularidad: </span>
+                📊 {{ film.popularity.toFixed(0) }}
+              </div>
+
+              @if (film.adult) {
+                <span class="bg-red-600 text-white px-2 py-1 rounded text-sm font-semibold">
+                  +18
+                </span>
+              }
+            </div>
+
+            <div class="mb-6">
+              <h2 class="text-2xl font-semibold mb-3">Sinopsis</h2>
+              <p class="text-gray-700 leading-relaxed">{{ film.overview }}</p>
+            </div>
+
+            @if (film.backdrop_path) {
+              <div class="mt-6">
+                <h2 class="text-2xl font-semibold mb-3">Imagen destacada</h2>
+                <img [src]="getImageUrl(film.backdrop_path)" [alt]="film.title" class="w-full rounded-lg shadow-md">
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="text-center">
+      <p class="text-2xl text-gray-600 mb-4">Película no encontrada</p>
+      <button (click)="goBack()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors">
+        Volver al listado
+      </button>
+    </div>
+  </div>
+}
