@@ -28,7 +28,7 @@ export class FilmDetail implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/'], {
+    this.router.navigate(['/list'], {
       state: {
         returnToPage: this.returnPage()
       }
