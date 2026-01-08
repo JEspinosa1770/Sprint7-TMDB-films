@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './film-list.css',
 })
 export class FilmList implements OnInit {
-  private apiService = inject(Api);
+  apiService = inject(Api);
   private router = inject(Router);
   // translationService = inject(Translate);
 
@@ -22,12 +22,12 @@ export class FilmList implements OnInit {
   isLoading = signal<boolean>(false);
   error = signal<string | null>(null);
 
-  getImageUrl(path: string | null, size: string = 'w780'): string {
-    if (!path) {
-      return 'error.png';
-    }
-    return `https://image.tmdb.org/t/p/${size}${path}`;
-  }
+  // getImageUrl(path: string | null, size: string = 'w780'): string {
+  //   if (!path) {
+  //     return 'error.png';
+  //   }
+  //   return `https://image.tmdb.org/t/p/${size}${path}`;
+  // }
 
   async ngOnInit() {
     const state = history.state;

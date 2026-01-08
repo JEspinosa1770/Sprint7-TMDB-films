@@ -26,4 +26,11 @@ export class Api {
 
     return response.json();
   }
+
+  getImageUrl(path: string | null, size: string = 'w500'): string {
+    if (!path) {
+      return 'error.png';
+    }
+    return `https://image.tmdb.org/t/p/${size}${path}`;
+  }
 }

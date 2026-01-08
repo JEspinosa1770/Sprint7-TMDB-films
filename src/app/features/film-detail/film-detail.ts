@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Film } from '../../core/models/film';
+import { Api } from '../../core/services/api';
 
 @Component({
   selector: 'app-film-detail',
@@ -11,6 +12,7 @@ import { Film } from '../../core/models/film';
 export class FilmDetail implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  apiService = inject(Api)
 
   movie = signal<Film | null>(null);
   returnPage = signal<number>(1);
@@ -44,6 +46,6 @@ export class FilmDetail implements OnInit {
   }
 
   getPosterUrl(path: string | null): string {
-    return this.getImageUrl(path, 'w300');
+    return this.apiService.getImageUrl(path, 'w300');
   }
 }
