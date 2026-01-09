@@ -1,5 +1,21 @@
 
-@if (movie(); as film) {
+@if (isLoading()) {
+  <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="text-center">
+      <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+      <p class="text-xl text-gray-600 mt-4">Cargando detalles...</p>
+    </div>
+  </div>
+} @else if (error()) {
+  <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div class="text-center">
+      <p class="text-2xl text-red-600 mb-4">{{ error() }}</p>
+      <button (click)="goBack()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors">
+        Volver al listado
+      </button>
+    </div>
+  </div>
+} @else if (movie(); as film) {
   <div class="min-h-screen bg-gray-100 py-8">
     <div class="max-w-6xl mx-auto px-4">
       <button (click)="goBack()" class="mb-6 flex items-center text-blue-600 hover:text-blue-800 transition-colors">
@@ -18,6 +34,10 @@
           <div class="md:w-2/3 p-8">
             <h1 class="text-4xl font-bold mb-2">{{ film.title }}</h1>
 
+            @if (film.tagline) {
+              <p class="text-lg text-gray-500 italic mb-4">"{{ film.tagline }}"</p>
+            }
+
             @if (film.original_title !== film.title) {
               <p class="text-xl text-gray-600 mb-4"><span class="strongKey">Título original:</span> {{ film.original_title }}</p>
             }
@@ -34,6 +54,12 @@
                 📅 {{ film.release_date }}
               </div>
 
+              @if (film.runtime) {
+                <div class="text-gray-600"><span class="strongKey">Duración: </span>
+                  ⏱️ {{ film.runtime }} min
+                </div>
+              }
+
               <div class="text-gray-600"><span class="strongKey">Idioma original: </span>
                 🌐 {{ film.original_language.toUpperCase() }}
               </div>
@@ -49,6 +75,19 @@
               }
             </div>
 
+            @if (film.genres && film.genres.length > 0) {
+              <div class="mb-6">
+                <span class="strongKey">Géneros: </span>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  @for (genre of film.genres; track genre.id) {
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                      {{ genre.name }}
+                    </span>
+                  }
+                </div>
+              </div>
+            }
+
             <div class="mb-6">
               <h2 class="text-2xl font-semibold mb-3">Sinopsis</h2>
               <p class="text-gray-700 leading-relaxed">{{ film.overview }}</p>
@@ -62,6 +101,62 @@
             }
           </div>
         </div>
+
+        <!-- Sección de Actores -->
+        @if (film.credits && film.credits.cast && film.credits.cast.length > 0) {
+          <div class="border-t border-gray-200 p-8">
+            <h2 class="text-3xl font-semibold mb-6">Reparto principal</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              @for (actor of film.credits.cast.slice(0, 12); track actor.id) {
+                <div class="text-center">
+                  <div class="mb-2 overflow-hidden rounded-lg shadow-md">
+                    @if (actor.profile_path) {
+                      <img [src]="apiService.getImageUrl(actor.profile_path, 'w185')"
+                           [alt]="actor.name"
+                           class="w-full h-48 object-cover">
+                    } @else {
+                      <div class="w-full h-48 bg-gray-300 flex items-center justify-center">
+                        <span class="text-gray-500 text-4xl">👤</span>
+                      </div>
+                    }
+                  </div>
+                  <p class="font-semibold text-sm">{{ actor.name }}</p>
+                  <p class="text-gray-600 text-xs">{{ actor.character }}</p>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Sección de Películas Similares -->
+        @if (film.similar && film.similar.results && film.similar.results.length > 0) {
+          <div class="border-t border-gray-200 p-8 bg-gray-50">
+            <h2 class="text-3xl font-semibold mb-6">Películas similares</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              @for (similar of film.similar.results.slice(0, 10); track similar.id) {
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
+                     (click)="loadMovieDetails(similar.id)">
+                  @if (similar.poster_path) {
+                    <img [src]="apiService.getImageUrl(similar.poster_path, 'w300')"
+                         [alt]="similar.title"
+                         class="w-full h-64 object-cover">
+                  } @else {
+                    <div class="w-full h-64 bg-gray-300 flex items-center justify-center">
+                      <span class="text-gray-500 text-5xl">🎬</span>
+                    </div>
+                  }
+                  <div class="p-3">
+                    <p class="font-semibold text-sm line-clamp-2">{{ similar.title }}</p>
+                    <div class="flex items-center mt-1">
+                      <span class="text-yellow-500 text-xs">⭐</span>
+                      <span class="text-xs ml-1">{{ similar.vote_average.toFixed(1) }}</span>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
       </div>
     </div>
   </div>

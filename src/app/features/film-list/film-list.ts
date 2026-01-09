@@ -48,7 +48,6 @@ console.error(err);
   onMovieClick(movie: Film): void {
     this.router.navigate(['/movie', movie.id], {
       state: {
-        movie: movie,
         returnPage: this.currentPage()
       }
     });

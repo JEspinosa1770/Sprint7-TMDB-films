@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Film } from '../../core/models/film';
+import { FilmDetails } from '../../core/models/film';
 import { Api } from '../../core/services/api';
 
 @Component({
@@ -14,21 +14,41 @@ export class FilmDetail implements OnInit {
   private route = inject(ActivatedRoute);
   apiService = inject(Api)
 
-  movie = signal<Film | null>(null);
+  movie = signal<FilmDetails | null>(null);
   returnPage = signal<number>(1);
+  isLoading = signal<boolean>(true);
+  error = signal<string | null>(null);
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const state = history.state;
-    console.log('State:', state);
 
-    if (state && state.movie) {
-      this.movie.set(state.movie);
-      this.returnPage.set(state.returnPage || 1);
+    if (state && state.returnPage) {
+      this.returnPage.set(state.returnPage);
+    }
+
+    const movieId = this.route.snapshot.paramMap.get('id');
+
+    if (movieId) {
+      await this.loadMovieDetails(Number(movieId));
     } else {
       this.router.navigate(['/']);
     }
   }
 
+  async loadMovieDetails(id: number): Promise<void> {
+    this.isLoading.set(true);
+    this.error.set(null);
+
+    try {
+      const details = await this.apiService.getFilmDetails(id);
+      this.movie.set(details);
+      this.isLoading.set(false);
+    } catch (err) {
+      console.error('Error loading movie details:', err);
+      this.error.set('Error al cargar los detalles de la película');
+      this.isLoading.set(false);
+    }
+  }
   goBack(): void {
     this.router.navigate(['/list'], {
       state: {
