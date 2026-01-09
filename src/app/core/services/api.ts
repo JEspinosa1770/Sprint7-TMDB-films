@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import type { FilmsResponse } from '../models/film';
+import type { FilmDetails, FilmsResponse } from '../models/film';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +32,27 @@ export class Api {
       return 'error.png';
     }
     return `https://image.tmdb.org/t/p/${size}${path}`;
+  }
+
+  async getFilmDetails(movieId: number): Promise<FilmDetails> {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${this.API_TOKEN}`);
+
+    const requestOptions: RequestInit = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    const response = await fetch(
+      `${this.API_URL}/movie/${movieId}?language=es-ES&append_to_response=credits,similar`,
+      requestOptions
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
   }
 }
