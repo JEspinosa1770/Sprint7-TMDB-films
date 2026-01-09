@@ -125,7 +125,7 @@
               @for (similar of film.similar.results.slice(0, 10); track similar.id) {
                 <div class="bg-red-50 rounded-lg shadow-md overflow-hidden hover:shadow-xl cursor-pointer  transition-transform duration-300 hover:scale-105" (click)="loadMovieDetails(similar.id)">
                   @if (similar.poster_path) {
-                    <div class="rounded-lg flex justify-center items-center">
+                    <div class="rounded-lg flex justify-center items-center pt-2">
                       <img [src]="apiService.getImageUrl(similar.poster_path, 'w300')" [alt]="similar.title" class="max-w-full h-64 object-contain rounded-lg">
                     </div>
                   } @else {
