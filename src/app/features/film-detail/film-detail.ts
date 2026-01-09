@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FilmDetails } from '../../core/models/film';
 import { Api } from '../../core/services/api';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-film-detail',
@@ -18,6 +19,10 @@ export class FilmDetail implements OnInit {
   returnPage = signal<number>(1);
   isLoading = signal<boolean>(true);
   error = signal<string | null>(null);
+
+  constructor(
+    private viewportScroller: ViewportScroller
+  ) {}
 
   async ngOnInit(): Promise<void> {
     const state = history.state;
@@ -48,6 +53,7 @@ export class FilmDetail implements OnInit {
       this.error.set('Error al cargar los detalles de la película');
       this.isLoading.set(false);
     }
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
   goBack(): void {
     this.router.navigate(['/list'], {

@@ -123,9 +123,11 @@
             <h2 class="text-3xl font-semibold mb-6">Películas similares</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               @for (similar of film.similar.results.slice(0, 10); track similar.id) {
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl cursor-pointer  transition-transform duration-300 hover:scale-105" (click)="loadMovieDetails(similar.id)">
+                <div class="bg-red-50 rounded-lg shadow-md overflow-hidden hover:shadow-xl cursor-pointer  transition-transform duration-300 hover:scale-105" (click)="loadMovieDetails(similar.id)">
                   @if (similar.poster_path) {
-                    <img [src]="apiService.getImageUrl(similar.poster_path, 'w300')" [alt]="similar.title" class="w-full h-64 object-cover">
+                    <div class="rounded-lg flex justify-center items-center">
+                      <img [src]="apiService.getImageUrl(similar.poster_path, 'w300')" [alt]="similar.title" class="max-w-full h-64 object-contain rounded-lg">
+                    </div>
                   } @else {
                     <div class="w-full h-64 bg-gray-300 flex items-center justify-center">
                       <span class="text-gray-500 text-5xl">🎬</span>
