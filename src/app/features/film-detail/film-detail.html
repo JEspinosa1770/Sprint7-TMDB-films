@@ -92,17 +92,10 @@
               <h2 class="text-2xl font-semibold mb-3">Sinopsis</h2>
               <p class="text-gray-700 leading-relaxed">{{ film.overview }}</p>
             </div>
-
-            @if (film.backdrop_path) {
-              <div class="mt-6">
-                <h2 class="text-2xl font-semibold mb-3">Imagen destacada</h2>
-                <img [src]="apiService.getImageUrl(film.backdrop_path)" [alt]="film.title" class="w-full rounded-lg shadow-md">
-              </div>
-            }
           </div>
         </div>
 
-        <!-- Sección de Actores -->
+        <!-- Actores -->
         @if (film.credits && film.credits.cast && film.credits.cast.length > 0) {
           <div class="border-t border-gray-200 p-8">
             <h2 class="text-3xl font-semibold mb-6">Reparto principal</h2>
@@ -128,7 +121,7 @@
           </div>
         }
 
-        <!-- Sección de Películas Similares -->
+        <!-- Películas Similares -->
         @if (film.similar && film.similar.results && film.similar.results.length > 0) {
           <div class="border-t border-gray-200 p-8 bg-gray-50">
             <h2 class="text-3xl font-semibold mb-6">Películas similares</h2>
