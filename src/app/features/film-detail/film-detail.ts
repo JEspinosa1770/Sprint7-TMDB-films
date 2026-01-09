@@ -43,6 +43,7 @@ export class FilmDetail implements OnInit {
   async loadMovieDetails(id: number): Promise<void> {
     this.isLoading.set(true);
     this.error.set(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     try {
       const details = await this.apiService.getFilmDetails(id);
@@ -53,8 +54,8 @@ export class FilmDetail implements OnInit {
       this.error.set('Error al cargar los detalles de la película');
       this.isLoading.set(false);
     }
-    this.viewportScroller.scrollToPosition([0, 0]);
   }
+  
   goBack(): void {
     this.router.navigate(['/list'], {
       state: {
