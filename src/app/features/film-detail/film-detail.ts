@@ -37,14 +37,6 @@ export class FilmDetail implements OnInit {
     });
   }
 
-
-  getImageUrl(path: string | null, size: string = 'w500'): string {
-    if (!path) {
-      return 'error.png';
-    }
-    return `https://image.tmdb.org/t/p/${size}${path}`;
-  }
-
   getPosterUrl(path: string | null): string {
     return this.apiService.getImageUrl(path, 'w300');
   }

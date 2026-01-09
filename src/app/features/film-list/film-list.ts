@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Api } from '../../core/services/api';
-// import { Translate } from '../../core/services/translate'
 import { Film, FilmsResponse } from '../../core/models/film';
 import { ButtonsNav } from "../../layout/buttons-nav/buttons-nav";
 import { Router } from '@angular/router';
@@ -14,7 +13,6 @@ import { Router } from '@angular/router';
 export class FilmList implements OnInit {
   apiService = inject(Api);
   private router = inject(Router);
-  // translationService = inject(Translate);
 
   movies = signal<Film[]>([]);
   currentPage = signal<number>(1);
@@ -22,19 +20,11 @@ export class FilmList implements OnInit {
   isLoading = signal<boolean>(false);
   error = signal<string | null>(null);
 
-  // getImageUrl(path: string | null, size: string = 'w780'): string {
-  //   if (!path) {
-  //     return 'error.png';
-  //   }
-  //   return `https://image.tmdb.org/t/p/${size}${path}`;
-  // }
-
   async ngOnInit() {
     const state = history.state;
     const returnToPage = state?.returnToPage || 1;
 
     await this.loadMovies(returnToPage);
-    // await this.loadMovies(1);
   }
 
   async loadMovies(page: number) {
