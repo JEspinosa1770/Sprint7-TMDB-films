@@ -13,18 +13,8 @@
           Register
         </a>
       } @else {
-        <a routerLink="/list" routerLinkActive="!text-[#01b4e4] !font-semibold" class="text-white hover:text-[#01b4e4] transition-colors font-medium">
-          Películas
-        </a>
-        <span class="text-white font-medium">
-          Hola, {{ authService.currentUser()?.displayName }}
-        </span>
-        <button
-          (click)="onLogout()"
-          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors font-medium"
-        >
-          Cerrar sesión
-        </button>
+        <span class="text-white font-medium">Hola, {{ authService.currentUser()?.displayName }}</span>
+        <button (click)="onLogout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors font-medium">Cerrar sesión</button>
       }
     </nav>
   </div>

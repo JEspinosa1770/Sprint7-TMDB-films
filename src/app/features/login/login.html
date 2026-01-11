@@ -1,4 +1,4 @@
-<p>login works!</p>
+
 <div class="min-h-screen bg-linear-to-br from-[#032541] to-[#01b4e4] flex items-center justify-center px-4 py-12">
   <div class="w-full max-w-md">
     <div class="bg-white rounded-2xl shadow-2xl p-8">
@@ -10,17 +10,8 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" class="space-y-6">
         <!-- Campo Email -->
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            formControlName="email"
-            placeholder="tu@email.com"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#01b4e4] focus:border-transparent outline-none transition-all"
-            [class.border-red-500]="email?.invalid && (email?.touched || buttonSubmitClicked())"
-          >
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="tu@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#01b4e4] focus:border-transparent outline-none transition-all" [class.border-red-500]="email?.invalid && (email?.touched || buttonSubmitClicked())">
           @if (email?.invalid && (email?.touched || buttonSubmitClicked())) {
             <p class="mt-1 text-sm text-red-600">
               @if (email?.errors?.['required']) {
@@ -35,17 +26,8 @@
 
         <!-- Campo Password -->
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            id="password"
-            formControlName="password"
-            placeholder="••••••"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#01b4e4] focus:border-transparent outline-none transition-all"
-            [class.border-red-500]="password?.invalid && (password?.touched || buttonSubmitClicked())"
-          >
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+          <input type="password" id="password" formControlName="password" placeholder="••••••" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#01b4e4] focus:border-transparent outline-none transition-all" [class.border-red-500]="password?.invalid && (password?.touched || buttonSubmitClicked())">
           @if (password?.invalid && (password?.touched || buttonSubmitClicked())) {
             <p class="mt-1 text-sm text-red-600">
               La contraseña es requerida
@@ -61,11 +43,7 @@
         }
 
         <!-- Botón Submit -->
-        <button
-          type="submit"
-          [disabled]="loading()"
-          class="w-full bg-[#01b4e4] text-white py-3 rounded-lg font-semibold hover:bg-[#0199c7] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-        >
+        <button type="submit" [disabled]="loading()" class="w-full bg-[#01b4e4] text-white py-3 rounded-lg font-semibold hover:bg-[#0199c7] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
           @if (loading()) {
             <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -83,9 +61,7 @@
       <div class="mt-6 text-center">
         <p class="text-gray-600">
           ¿No tienes cuenta?
-          <a routerLink="/register" class="text-[#01b4e4] hover:text-[#0199c7] font-semibold ml-1">
-            Regístrate
-          </a>
+          <a routerLink="/register" class="text-[#01b4e4] hover:text-[#0199c7] font-semibold ml-1">Regístrate</a>
         </p>
       </div>
     </div>

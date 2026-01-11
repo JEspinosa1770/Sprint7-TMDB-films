@@ -33,13 +33,11 @@ export class FilmList implements OnInit {
 
     try {
       const result: FilmsResponse = await this.apiService.getFilmsBlock(page);
-console.log(result);
       this.movies.set(result.results);
       this.currentPage.set(result.page);
       this.totalPages.set(result.total_pages);
       this.isLoading.set(false);
     } catch (err) {
-console.error(err);
       this.error.set('Error al cargar las películas');
       this.isLoading.set(false);
     }

@@ -44,10 +44,7 @@ export class Api {
       redirect: "follow"
     };
 
-    const response = await fetch(
-      `${this.API_URL}/movie/${movieId}?language=es-ES&append_to_response=credits,similar`,
-      requestOptions
-    );
+    const response = await fetch(`${this.API_URL}/movie/${movieId}?language=es-ES&append_to_response=credits,similar`, requestOptions);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

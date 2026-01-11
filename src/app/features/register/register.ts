@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../core/services/user-service';
 import { RouterLink } from '@angular/router';
@@ -11,21 +11,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './register.css',
 })
 export class Register {
-  registerForm: FormGroup;
   buttonSubmitClicked = signal(false);
   errorMessage = signal('');
   loading = signal(false);
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: UserService
-  ) {
-    this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-Z0-9]+$/)]]
-    });
-  }
+  private fb = inject(FormBuilder);
+  private authService = inject(UserService);
+
+  registerForm: FormGroup = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
+  });
 
   async onSubmitRegister() {
     this.buttonSubmitClicked.set(true);

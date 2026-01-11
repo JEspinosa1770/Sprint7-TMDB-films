@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../core/services/user-service';
@@ -11,20 +11,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.css',
 })
 export class Login {
-  loginForm: FormGroup;
   buttonSubmitClicked = signal(false);
   errorMessage = signal('');
   loading = signal(false);
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: UserService
-  ) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    });
-  }
+  private fb = inject(FormBuilder);
+  private authService = inject(UserService);
+
+  loginForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
+  });
 
   async onSubmitLogin() {
     this.buttonSubmitClicked.set(true);
