@@ -1,14 +1,31 @@
 
 <header class="bg-[#032541] shadow-md">
   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    <img src="/TMDB_logo.svg" alt="TMDB Logo" class="h-4 md:h-6">
-    <nav class="flex gap-6">
-      <a routerLink="/login" routerLinkActive="!text-[#01b4e4] !font-semibold" [routerLinkActiveOptions]="{ exact: true }" class="text-white hover:text-[#01b4e4] transition-colors font-medium">
-        Login
-      </a>
-      <a routerLink="/register" routerLinkActive="!text-[#01b4e4] !font-semibold" [routerLinkActiveOptions]="{ exact: true }" class="text-white hover:text-[#01b4e4] transition-colors font-medium">
-        Register
-      </a>
+    <a routerLink="/">
+      <img src="/TMDB_logo.svg" alt="TMDB Logo" class="h-4 md:h-6 cursor-pointer">
+    </a>
+    <nav class="flex gap-6 items-center">
+      @if (!authService.currentUser()) {
+        <a routerLink="/login" routerLinkActive="!text-[#01b4e4] !font-semibold" [routerLinkActiveOptions]="{ exact: true }" class="text-white hover:text-[#01b4e4] transition-colors font-medium">
+          Login
+        </a>
+        <a routerLink="/register" routerLinkActive="!text-[#01b4e4] !font-semibold" [routerLinkActiveOptions]="{ exact: true }" class="text-white hover:text-[#01b4e4] transition-colors font-medium">
+          Register
+        </a>
+      } @else {
+        <a routerLink="/list" routerLinkActive="!text-[#01b4e4] !font-semibold" class="text-white hover:text-[#01b4e4] transition-colors font-medium">
+          Películas
+        </a>
+        <span class="text-white font-medium">
+          Hola, {{ authService.currentUser()?.displayName }}
+        </span>
+        <button
+          (click)="onLogout()"
+          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors font-medium"
+        >
+          Cerrar sesión
+        </button>
+      }
     </nav>
   </div>
 </header>
