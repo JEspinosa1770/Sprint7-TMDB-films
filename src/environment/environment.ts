@@ -1,6 +1,6 @@
 
 export const environment = {
-  production: false,
+  production: true,
   firebaseConfig: {
     projectId: "sprint7-tmdb",
     appId: "1:715365002130:web:648eb0229fe6a5981aaf4b",
