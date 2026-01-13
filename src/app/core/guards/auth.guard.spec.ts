@@ -10,7 +10,6 @@ describe('authGuard', () => {
   let routerMocked: any;
 
   beforeEach(() => {
-    // Creamos servicios falsos
     userServiceMocked = {
       currentUser: vi.fn()
     };

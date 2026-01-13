@@ -46,3 +46,13 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+firebase-export-*/
+.firebaserc
+firebase.json
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Firebase emulator data
+*-debug.log
+firebase-export-*

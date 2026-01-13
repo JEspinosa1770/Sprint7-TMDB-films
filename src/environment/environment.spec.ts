@@ -1,16 +1,17 @@
-import { TestBed } from '@angular/core/testing';
 
-import { Environment } from './environment';
+import { environment } from './environment';
 
 describe('Environment', () => {
-  let service: Environment;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Environment);
+  it('should be defined', () => {
+    expect(environment).toBeTruthy();
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should be production environment', () => {
+    expect(environment.production).toBe(true);
+  });
+
+  it('should have firebase configuration', () => {
+    expect(environment.firebaseConfig).toBeDefined();
+    expect(environment.firebaseConfig.projectId).toBe('sprint7-tmdb');
   });
 });
