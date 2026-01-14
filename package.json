@@ -41,6 +41,7 @@
     "@angular/compiler-cli": "^21.0.8",
     "@tailwindcss/postcss": "^4.1.12",
     "@vitest/ui": "^4.0.17",
+    "angular-cli-ghpages": "^3.0.2",
     "firebase-tools": "^14.27.0",
     "jsdom": "^27.4.0",
     "postcss": "^8.5.3",

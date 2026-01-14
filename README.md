@@ -598,7 +598,7 @@ Componente *film-detail*
 
 Puede verse una demo del proyecto en su estado actual en:
 
-[Demo en GitHub Pages](#)
+[Demo en GitHub Pages](https://jespinosa1770.github.io/Sprint7-TMDB-films/)
 
 ## Contribuciones y Contacto
 Este proyecto ha sido desarrollado por **Jordi Espinosa** como parte del Sprint 7 del bootcamp de Front End sobre Angular.
