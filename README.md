@@ -592,7 +592,7 @@ Componente *film-list*
 
 Componente *film-detail*
 ![Componente film-detail](./public/filmdetail12.gif)
-[PENDIENTE DE COMPLETAR - Añadir capturas de pantalla]
+
 
 ## Demo
 
