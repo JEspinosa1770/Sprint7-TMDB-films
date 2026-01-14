@@ -56,3 +56,6 @@ ui-debug.log
 # Firebase emulator data
 *-debug.log
 firebase-export-*
+
+# Environment
+src/environment

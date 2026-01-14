@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import type { FilmDetails, FilmsResponse } from '../models/film';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Api {
   private readonly API_URL = 'https://api.themoviedb.org/3';
-  private readonly API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMWRjMWQ5ZjExYjg4Mjg5NTZiMjVkMzdjZmMxNTkzNiIsIm5iZiI6MTc2NjM0MTkzNy40NTQwMDAyLCJzdWIiOiI2OTQ4M2QzMWQzMDNhNmJjMjc4ZWI2NjkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Pjv-_hq-jmVRgSRR2aH_LsrPSKcAQzcMhNzBGGVtKb0';
+  private readonly API_TOKEN = environment.tmdbApiToken;
 
   async getFilmsBlock(page: number = 1): Promise<FilmsResponse> {
     const myHeaders = new Headers();

@@ -3,7 +3,6 @@ import { FilmList } from './features/film-list/film-list';
 import { FilmDetail } from './features/film-detail/film-detail';
 import { Login } from './features/login/login';
 import { Register } from './features/register/register';
-// import { Component } from '@angular/core';
 import { Home } from './features/home/home';
 import { authGuard } from './core/guards/auth.guard';
 
